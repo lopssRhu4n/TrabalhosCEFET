@@ -1,14 +1,7 @@
+#include "../utils/utils.h"
 #include <iostream>
 
 using namespace std;
-
-void printaArray(int arr[], int len) {
-  cout << "{ ";
-  for (int i = 0; i < len; i++)
-    cout << arr[i] << " ";
-
-  cout << "}\n";
-}
 
 void merge(int arr[], int begin, int half, int end) {
   // r => iterator for right
@@ -22,7 +15,7 @@ void merge(int arr[], int begin, int half, int end) {
   int arrLeft[lenL], arrRight[lenR];
 
   for (i = 0; i < lenL; i++) {
-    arrLeft[i] = arr[begin + i];
+    arrLeft[i] = arr[begin + i - 1];
   }
 
   for (i = 0; i < lenR; i++) {
@@ -50,18 +43,12 @@ void merge(int arr[], int begin, int half, int end) {
 void mergeSort(int arr[], int begin, int end) {
   if (begin < end) {
     int half = (begin + end) / 2;
-    cout << "B: " << begin << " E: " << end << endl;
+    // cout << "B: " << begin << " E: " << end << endl;
     // cout << half;
     mergeSort(arr, begin, half);
     mergeSort(arr, half + 1, end);
     merge(arr, begin, half, end);
   }
-}
-
-void preencheArray(int arr[], int len) {
-  srand(time(nullptr));
-  for (int i = 0; i < len; i++)
-    arr[i] = (rand() - (RAND_MAX / 2)) % 1000;
 }
 
 int main() {
@@ -70,7 +57,7 @@ int main() {
 
   preencheArray(myArr, 20);
   printaArray(myArr, 20);
-  mergeSort(myArr, 0, 20);
+  mergeSort(myArr, 0, 19);
   printaArray(myArr, 20);
 
   return 0;

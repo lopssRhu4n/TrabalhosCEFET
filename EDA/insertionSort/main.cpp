@@ -1,3 +1,4 @@
+#include "../utils/utils.h"
 #include <cstdlib>
 #include <iostream>
 using namespace std;
@@ -17,20 +18,6 @@ void insertionSort(int arr[], int len, int ordem) {
       arr[indiceAux] = aux;
     }
   }
-}
-
-void printaArray(int arr[], int len) {
-  cout << "{ ";
-  for (int i = 0; i < len; i++)
-    cout << arr[i] << " ";
-
-  cout << "}\n";
-}
-
-void preencheArray(int arr[], int len) {
-  srand(time(nullptr));
-  for (int i = 0; i < len; i++)
-    arr[i] = (rand() - (RAND_MAX / 2)) % 1000;
 }
 
 void trataArray(int myArr[], int len) {
