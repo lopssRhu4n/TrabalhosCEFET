@@ -1,8 +1,13 @@
+#include <iostream>
 
+using namespace std;
 
-void mergeSort(int arr[], int len) {
-  int half = len / 2;
-  int halfArr[half];
+void printaArray(int arr[], int len) {
+  cout << "{ ";
+  for (int i = 0; i < len; i++)
+    cout << arr[i] << " ";
+
+  cout << "}\n";
 }
 
 void merge(int arr[], int begin, int half, int end) {
@@ -12,33 +17,61 @@ void merge(int arr[], int begin, int half, int end) {
   lenL = half - begin + 1;
   lenR = end - half;
 
-  int arrLeft[lenL + 1], arrRight[lenR + 1];
+  // cout << "L: " << lenL << " R: " << lenR << endl;
+
+  int arrLeft[lenL], arrRight[lenR];
 
   for (i = 0; i < lenL; i++) {
-    arrLeft[i] = arr[begin + i - 1];
+    arrLeft[i] = arr[begin + i];
   }
 
   for (i = 0; i < lenR; i++) {
     arrRight[i] = arr[half + i];
   }
 
-  arrLeft[lenL + 1] = arrRight[lenR + 1] = -0;
+  // printaArray(arrLeft, lenL);
+  // printaArray(arrRight, lenR);
 
-  l = r = 1;
+  l = r = 0;
 
   for (int k = begin; k < end; k++) {
     if (arrLeft[l] <= arrRight[r]) {
       arr[k] = arrLeft[l];
-      i++;
+      if (l < lenL)
+        l++;
     } else {
       arr[k] = arrRight[r];
+      if (r < lenR)
+        r++;
     }
   }
+}
+
+void mergeSort(int arr[], int begin, int end) {
+  if (begin < end) {
+    int half = (begin + end) / 2;
+    cout << "B: " << begin << " E: " << end << endl;
+    // cout << half;
+    mergeSort(arr, begin, half);
+    mergeSort(arr, half + 1, end);
+    merge(arr, begin, half, end);
+  }
+}
+
+void preencheArray(int arr[], int len) {
+  srand(time(nullptr));
+  for (int i = 0; i < len; i++)
+    arr[i] = (rand() - (RAND_MAX / 2)) % 1000;
 }
 
 int main() {
 
   int myArr[20] = {0};
+
+  preencheArray(myArr, 20);
+  printaArray(myArr, 20);
+  mergeSort(myArr, 0, 20);
+  printaArray(myArr, 20);
 
   return 0;
 }
