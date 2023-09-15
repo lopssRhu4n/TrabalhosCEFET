@@ -12,12 +12,11 @@ typedef struct {
   Node *last;
 } List;
 
-List newList() {
+void setupList(List *L) {
 
-  List L;
-  L.length = 0;
-
-  return L;
+  L->length = 0;
+  L->first = nullptr;
+  L->last = nullptr;
 }
 
 Node newNode(int val, Node *ptr) {
@@ -78,9 +77,11 @@ void printList(List *list) {
 
   cout << "[ ";
   for (i = 1; i <= list->length; i++) {
-    cout << cur->value << " -> ";
-    if (cur->next != nullptr)
+    cout << cur->value << ", " << cur->next;
+    if (cur->next != nullptr) {
+      cout << " -> ";
       cur = cur->next;
+    }
   }
 
   cout << " ]\n";
@@ -88,9 +89,23 @@ void printList(List *list) {
 
 int main() {
 
-  List myList = newList();
+  List myList;
+  Node n, n2, n3;
 
-  addToList(0, 1, &myList);
+  setupList(&myList);
+
+  n = newNode(5, nullptr);
+
+  n2 = newNode(6, &n);
+
+  myList.first = &n2;
+  myList.length++;
+  myList.length++;
+
+  n3 = newNode(16, &n);
+
+  myList.first->next = &n3;
+  myList.length++;
 
   printList(&myList);
 
