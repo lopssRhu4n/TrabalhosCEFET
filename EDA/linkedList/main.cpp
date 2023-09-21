@@ -101,13 +101,16 @@ int addToList(int index, int val, List *list) {
 
 int searchInList(int val, List *list) {
   Node *cur = list->first;
-  int i;
+  int i = -1;
 
-  while (cur->value != val && cur != nullptr) {
+  while (cur != nullptr) {
+    i++;
+    if (cur->value == val)
+      return i;
+
     cur = cur->next;
   }
-
-  return i;
+  return -1;
 }
 
 void printList(List *list) {
@@ -145,7 +148,6 @@ int main() {
   Node *n, *n2, *n3;
 
   setupList(&myList);
-
   myList.add(0, 5, &myList);
   myList.add(0, 9, &myList);
   myList.add(-1, 15, &myList);
@@ -153,10 +155,14 @@ int main() {
 
   printList(&myList);
 
+  cout << "Index of 15: " << myList.search(15, &myList) << endl;
+
   myList.remove(2, &myList);
   myList.remove(1, &myList);
 
   printList(&myList);
+
+  cout << "Index of 15: " << myList.search(15, &myList) << endl;
 
   return 0;
 }
