@@ -12,14 +12,8 @@ typedef struct L {
   Node *last;
   int (*remove)(int, L *);
   int (*add)(int index, int val, L *list);
+  int (*search)(int val, L *list);
 } List;
-
-void setupList(List *L) {
-
-  L->length = 0;
-  L->first = nullptr;
-  L->last = nullptr;
-}
 
 Node *newNode(int val, Node *ptr) {
   Node *node = new Node;
@@ -97,13 +91,23 @@ int addToList(int index, int val, List *list) {
   if (index > list->length) {
     return 1;
   }
-
   Node *prevNode, *nextNode;
 
   node = newNode(val, nullptr);
   resolveNodes(prevNode, nextNode, node, index, list);
 
   return 0;
+}
+
+int searchInList(int val, List *list) {
+  Node *cur = list->first;
+  int i;
+
+  while (cur->value != val && cur != nullptr) {
+    cur = cur->next;
+  }
+
+  return i;
 }
 
 void printList(List *list) {
@@ -125,13 +129,20 @@ void printList(List *list) {
   cout << " ]\n";
 }
 
+void setupList(List *L) {
+
+  L->length = 0;
+  L->first = nullptr;
+  L->last = nullptr;
+  L->remove = &removeFromList;
+  L->add = &addToList;
+  L->search = &searchInList;
+}
+
 int main() {
 
   List myList;
   Node *n, *n2, *n3;
-
-  myList.remove = &removeFromList;
-  myList.add = &addToList;
 
   setupList(&myList);
 
