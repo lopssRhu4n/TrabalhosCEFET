@@ -1,9 +1,10 @@
+#include "./cards.cpp"
 #include <iostream>
 
 using namespace std;
 
 typedef struct n {
-  int val;
+  Card *card;
   n *next;
 } Node;
 
@@ -33,6 +34,13 @@ void removeFromStack(Stack *s) {
   }
 }
 
+Node *NewNode() {
+  Node *n = new Node;
+  n->next = NULL;
+  n->card = NULL;
+  return n;
+}
+
 Stack *NewStack() {
   Stack *s = new Stack;
   s->top = NULL;
@@ -41,11 +49,4 @@ Stack *NewStack() {
   s->remove = NULL;
 
   return s;
-}
-
-int main(int argc, char *argv[]) {
-
-  cout << "\033[1;4;31;47mbolf Hello World\033[m\n";
-
-  return 0;
 }

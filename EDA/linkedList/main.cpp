@@ -43,7 +43,7 @@ void resolveNodes(Node *savePrev, Node *saveNext, Node *insertNode, int index,
 int removeFromList(int index, List *list) {
 
   if (index > list->length) {
-    return 1;
+    return -1;
   }
 
   if (index == 1) {
