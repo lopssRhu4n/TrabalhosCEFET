@@ -74,3 +74,5 @@ def gerarArrayDaRegraEmBinario(regra):
 
 
 gerarAutomato(10, 23, 30)
+
+# FEITO POR RHUAN LOPES ! :)
